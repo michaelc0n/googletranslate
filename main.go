@@ -17,7 +17,7 @@ var targetLang string
 var sourceText string
 
 func init() {
-	flag.StringVar(&sourceLang, "s", "en", "Source lanuguage[en")
+	flag.StringVar(&sourceLang, "s", "en", "Source language[en")
 	flag.StringVar(&targetLang, "t", "fr", "Target language[fr]")
 	flag.StringVar(&sourceText, "st", "", "Text to translate")
 }
