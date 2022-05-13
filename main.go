@@ -4,7 +4,13 @@ import (
 	"flag"
 	"fmt"
 	"os"
+	"strings"
+	"sync"
+
+	"github.com/michaelc0n/googletranslate/cli"
 )
+
+var wg sync.WaitGroup
 
 var sourceLang string
 var targetLang string
@@ -25,11 +31,22 @@ func main() {
 		os.Exit(1)
 	}
 
+	strChan := make(chan string)
+
+	wg.Add(1)
+
 	reqBody := &cli.RequestBody{
 		SourceLang: sourceLang,
 		TargetLang: targetLang,
 		SourceText: sourceText,
 	}
 
-	cli.RequestTranslate(reqBody)
+	// new goroutine
+	go cli.RequestTranslate(reqBody, strChan, &wg)
+
+	processedStr := strings.ReplaceAll(<-strChan, "+", " ")
+
+	fmt.Printf("%s\n", processedStr)
+	close(strChan)
+	wg.Wait()
 }
