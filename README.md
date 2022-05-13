@@ -3,7 +3,7 @@
 ## About
 
 Translate source language to another language
-<br /><br /><br />
+<br /><br />
 ## Defaults (without passing values)
 
 ```
@@ -16,7 +16,8 @@ Options:
   -t string
         Target language[fr] (default "fr")
 ```
-<br /><br /><br />
+<br />
+
 ## Example (translate English to Spanish)
 ```
 go run main.go -s en -st hello -t es
